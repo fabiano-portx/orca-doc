@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PortX ORCA Account Management API Documentation">
+  <title>API Reference | PortX ORCA API</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+<link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css">
+<link rel="stylesheet" href="/assets/css/api.css">
+
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+</head>
+<body>
+  <header class="nav">
+  <div class="nav__container">
+    <a href="/" class="nav__logo">
+      <img 
+        src="https://portx.io/wp-content/uploads/2024/08/PortX-2color-black-horizontal.png" 
+        alt="PortX Logo"
+        width="120"
+        height="32"
+      >
+    </a>
+    
+    <nav>
+      <ul class="nav__links">
+        <li>
+          <a href="/" class="nav__link ">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="/api/" class="nav__link nav__link--active">
+            API Reference
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  
+  <main>
+    
+<div class="api-page">
+  <!-- Version Selector -->
+  <div class="version-selector">
+    <label class="version-selector__label" for="version-select">API Version:</label>
+    <div class="version-selector__dropdown">
+      <select id="version-select" class="version-selector__select">
+        
+          <option 
+            value="0.13.3" 
+            data-file="accounts-api-0.13.3.yaml"
+            selected
+          >
+            v0.13.3
+             (Latest)
+            
+          </option>
+        
+          <option 
+            value="0.13.2" 
+            data-file="accounts-api-0.13.2.yaml"
+            
+          >
+            v0.13.2
+            
+            
+          </option>
+        
+          <option 
+            value="0.13.1" 
+            data-file="accounts-api-0.13.1.yaml"
+            
+          >
+            v0.13.1
+            
+            
+          </option>
+        
+          <option 
+            value="0.12.6" 
+            data-file="accounts-api-0.12.6.yaml"
+            
+          >
+            v0.12.6
+            
+            
+          </option>
+        
+          <option 
+            value="0.8.0" 
+            data-file="accounts-api-0.8.0.yaml"
+            
+          >
+            v0.8.0
+            
+             ⚠️ Deprecated
+          </option>
+        
+          <option 
+            value="0.6.2" 
+            data-file="accounts-api-0.6.2.yaml"
+            
+          >
+            v0.6.2
+            
+             ⚠️ Deprecated
+          </option>
+        
+          <option 
+            value="0.6.1" 
+            data-file="accounts-api-0.6.1.yaml"
+            
+          >
+            v0.6.1
+            
+             ⚠️ Deprecated
+          </option>
+        
+      </select>
+    </div>
+  </div>
+  
+  <!-- Deprecation Warning -->
+  <div id="deprecation-warning" class="deprecation-warning">
+    <span class="deprecation-warning__icon">⚠️</span>
+    <span>
+      <strong>This version is deprecated.</strong> 
+      Please consider upgrading to the <a href="?version=0.13.3">latest version</a>.
+    </span>
+  </div>
+  
+  <!-- Stoplight Elements API Reference -->
+  <div class="api-container">
+    <elements-api
+      apiDescriptionUrl="/specs/accounts-api-0.13.3.yaml"
+      router="hash"
+      layout="sidebar"
+    />
+  </div>
+</div>
+
+  </main>
+  
+  <footer class="footer">
+  <div class="footer__container">
+    <a href="/" class="footer__logo">
+      <img 
+        src="https://portx.io/wp-content/uploads/2023/03/portx-logo-green.png" 
+        alt="PortX Logo"
+        width="80"
+        height="24"
+      >
+    </a>
+    
+    <nav>
+      <ul class="footer__links">
+        <li>
+          <a href="https://portx.io" class="footer__link" target="_blank" rel="noopener">
+            PortX Website
+          </a>
+        </li>
+        <li>
+          <a href="mailto:betiana.darderes@portx.io" class="footer__link">
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
+    <p>&copy; 2026 PortX. All rights reserved.</p>
+  </div>
+</footer>
+
+  
+  
+<script src="https://unpkg.com/@stoplight/elements/web-components.min.js"></script>
+<script src="/assets/js/version-switcher.js"></script>
+
+</body>
+</html>

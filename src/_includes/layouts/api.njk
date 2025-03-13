@@ -1,0 +1,53 @@
+{% extends "layouts/base.njk" %}
+
+{% block styles %}
+<link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css">
+<link rel="stylesheet" href="/assets/css/api.css">
+{% endblock %}
+
+{% block content %}
+<div class="api-page">
+  <!-- Version Selector -->
+  <div class="version-selector">
+    <label class="version-selector__label" for="version-select">API Version:</label>
+    <div class="version-selector__dropdown">
+      <select id="version-select" class="version-selector__select">
+        {% for v in versions %}
+          <option 
+            value="{{ v.version }}" 
+            data-file="{{ v.file }}"
+            {% if v.latest %}selected{% endif %}
+          >
+            v{{ v.version }}
+            {% if v.latest %} (Latest){% endif %}
+            {% if v.deprecated %} ⚠️ Deprecated{% endif %}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  
+  <!-- Deprecation Warning -->
+  <div id="deprecation-warning" class="deprecation-warning">
+    <span class="deprecation-warning__icon">⚠️</span>
+    <span>
+      <strong>This version is deprecated.</strong> 
+      Please consider upgrading to the <a href="?version=0.13.3">latest version</a>.
+    </span>
+  </div>
+  
+  <!-- Stoplight Elements API Reference -->
+  <div class="api-container">
+    <elements-api
+      apiDescriptionUrl="/specs/{{ versions | getLatestVersionFile }}"
+      router="hash"
+      layout="sidebar"
+    />
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/@stoplight/elements/web-components.min.js"></script>
+<script src="/assets/js/version-switcher.js"></script>
+{% endblock %}

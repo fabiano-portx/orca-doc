@@ -1,0 +1,27 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+<div class="docs-layout">
+  <aside class="docs-sidebar">
+    <p class="docs-sidebar__title">Documentation</p>
+    <nav>
+      <ul class="docs-sidebar__nav">
+        {% for item in navigation.docs %}
+          <li>
+            <a 
+              href="{{ item.url }}" 
+              class="docs-sidebar__link {% if page.url == item.url %}docs-sidebar__link--active{% endif %}"
+            >
+              {{ item.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </aside>
+  
+  <article class="docs-content">
+    {{ content | safe }}
+  </article>
+</div>
+{% endblock %}

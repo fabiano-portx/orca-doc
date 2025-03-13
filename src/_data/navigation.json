@@ -1,0 +1,16 @@
+{
+  "docs": [
+    {
+      "title": "Getting Started",
+      "url": "/docs/getting-started/"
+    },
+    {
+      "title": "Authentication",
+      "url": "/docs/authentication/"
+    },
+    {
+      "title": "Changelog",
+      "url": "/docs/changelog/"
+    }
+  ]
+}

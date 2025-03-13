@@ -1,0 +1,9 @@
+[
+  { "version": "0.13.3", "file": "accounts-api-0.13.3.yaml", "latest": true },
+  { "version": "0.13.2", "file": "accounts-api-0.13.2.yaml" },
+  { "version": "0.13.1", "file": "accounts-api-0.13.1.yaml" },
+  { "version": "0.12.6", "file": "accounts-api-0.12.6.yaml" },
+  { "version": "0.8.0", "file": "accounts-api-0.8.0.yaml", "deprecated": true },
+  { "version": "0.6.2", "file": "accounts-api-0.6.2.yaml", "deprecated": true },
+  { "version": "0.6.1", "file": "accounts-api-0.6.1.yaml", "deprecated": true }
+]

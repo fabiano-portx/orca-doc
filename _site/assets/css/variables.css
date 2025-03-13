@@ -1,0 +1,102 @@
+/* PortX Brand Tokens */
+:root {
+  /* Primary Colors */
+  --color-primary: #00DF99;
+  --color-primary-light: #89FFF8;
+  --color-primary-dark: #00B87A;
+  
+  /* Accent Colors */
+  --color-accent-purple: #8872FF;
+  --color-accent-blue: #77B4FF;
+  --color-accent-cyan: #00C9E4;
+  
+  /* Neutrals */
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+  
+  /* Semantic Colors */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-deprecated: #F59E0B;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #00DF99, #89FFF8);
+  --gradient-purple: linear-gradient(135deg, #8872FF, #77B4FF);
+  --gradient-cyan: linear-gradient(135deg, #00C9E4, #02E4A0);
+  
+  /* Typography */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  
+  /* Font Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  
+  /* Spacing */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  
+  /* Layout */
+  --max-width: 1280px;
+  --nav-height: 64px;
+  --sidebar-width: 280px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+}
+
+/* Dark Mode (respects system preference) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: var(--color-gray-900);
+    --color-bg-secondary: var(--color-gray-800);
+    --color-text: var(--color-gray-100);
+    --color-text-secondary: var(--color-gray-400);
+    --color-border: var(--color-gray-700);
+  }
+}
+
+/* Light Mode (default) */
+:root {
+  --color-bg: var(--color-white);
+  --color-bg-secondary: var(--color-gray-50);
+  --color-text: var(--color-gray-900);
+  --color-text-secondary: var(--color-gray-600);
+  --color-border: var(--color-gray-200);
+}
