@@ -9,6 +9,10 @@
       "url": "/docs/authentication/"
     },
     {
+      "title": "HTTP Methods Guide",
+      "url": "/docs/api_when_to_choose_post_put_patch/"
+    },
+    {
       "title": "Changelog",
       "url": "/docs/changelog/"
     }

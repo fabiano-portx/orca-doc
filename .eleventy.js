@@ -12,9 +12,6 @@ module.exports = function(eleventyConfig) {
   // Watch targets
   eleventyConfig.addWatchTarget("src/assets/");
 
-  // Ignore docs folder (hidden for now)
-  eleventyConfig.ignores.add("src/docs/**");
-
   // Custom filter to get latest version file
   eleventyConfig.addFilter("getLatestVersionFile", function(versions) {
     const latest = versions.find(v => v.latest);

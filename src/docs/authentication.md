@@ -1,6 +1,7 @@
 ---
 layout: layouts/docs.njk
 title: Authentication
+permalink: /docs/authentication/
 ---
 
 # Authentication

@@ -1,6 +1,7 @@
 ---
 layout: layouts/docs.njk
 title: Changelog
+permalink: /docs/changelog/
 ---
 
 # Changelog
