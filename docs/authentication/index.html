@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PortX ORCA Account Management API Documentation">
+  <title>Authentication | PortX ORCA API</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+</head>
+<body>
+  <header class="nav">
+  <div class="nav__container">
+    <a href="/" class="nav__logo">
+      <img 
+        src="https://portx.io/wp-content/uploads/2024/08/PortX-2color-black-horizontal.png" 
+        alt="PortX Logo"
+        width="120"
+        height="32"
+      >
+    </a>
+    
+    <nav>
+      <ul class="nav__links">
+        <li>
+          <a href="/" class="nav__link ">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="/api/" class="nav__link ">
+            API Reference
+          </a>
+        </li>
+        <li>
+          <a href="/docs/getting-started/" class="nav__link nav__link--active">
+            Documentation
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  
+  <main>
+    
+<div class="docs-layout">
+  <aside class="docs-sidebar">
+    <p class="docs-sidebar__title">Documentation</p>
+    <nav>
+      <ul class="docs-sidebar__nav">
+        
+          <li>
+            <a 
+              href="/docs/getting-started/" 
+              class="docs-sidebar__link "
+            >
+              Getting Started
+            </a>
+          </li>
+        
+          <li>
+            <a 
+              href="/docs/authentication/" 
+              class="docs-sidebar__link docs-sidebar__link--active"
+            >
+              Authentication
+            </a>
+          </li>
+        
+          <li>
+            <a 
+              href="/docs/changelog/" 
+              class="docs-sidebar__link "
+            >
+              Changelog
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </aside>
+  
+  <article class="docs-content">
+    <h1>Authentication</h1>
+<p>The PortX ORCA API uses industry-standard authentication mechanisms to secure access to your data.</p>
+<h2>Authentication Methods</h2>
+<h3>JWT Bearer Tokens</h3>
+<p>The primary authentication method is JWT (JSON Web Token) bearer tokens obtained via OAuth 2.0.</p>
+<h4>Obtaining a Token</h4>
+<p>Request an access token from the authorization server:</p>
+<pre><code class="language-bash">POST https://auth.portx.io/oauth/token
+Content-Type: application/json
+
+{
+  &quot;client_id&quot;: &quot;your_client_id&quot;,
+  &quot;client_secret&quot;: &quot;your_client_secret&quot;,
+  &quot;grant_type&quot;: &quot;client_credentials&quot;,
+  &quot;scope&quot;: &quot;accounts:read accounts:write&quot;
+}
+</code></pre>
+<h4>Response</h4>
+<pre><code class="language-json">{
+  &quot;access_token&quot;: &quot;eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...&quot;,
+  &quot;token_type&quot;: &quot;Bearer&quot;,
+  &quot;expires_in&quot;: 3600,
+  &quot;scope&quot;: &quot;accounts:read accounts:write&quot;
+}
+</code></pre>
+<h3>Using the Token</h3>
+<p>Include the access token in the <code>Authorization</code> header:</p>
+<pre><code class="language-bash">curl https://api.portx.io/orca/v1/accounts \
+  -H &quot;Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...&quot;
+</code></pre>
+<h2>Scopes</h2>
+<p>Access is controlled through OAuth scopes. Request only the scopes your application needs:</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accounts:read</code></td>
+<td>Read account information</td>
+</tr>
+<tr>
+<td><code>accounts:write</code></td>
+<td>Create and modify accounts</td>
+</tr>
+<tr>
+<td><code>transactions:read</code></td>
+<td>View transaction history</td>
+</tr>
+<tr>
+<td><code>transactions:write</code></td>
+<td>Create transactions</td>
+</tr>
+<tr>
+<td><code>parties:read</code></td>
+<td>Read party (customer) data</td>
+</tr>
+<tr>
+<td><code>parties:write</code></td>
+<td>Create and modify parties</td>
+</tr>
+<tr>
+<td><code>cards:read</code></td>
+<td>View card information</td>
+</tr>
+<tr>
+<td><code>cards:write</code></td>
+<td>Issue and manage cards</td>
+</tr>
+</tbody>
+</table>
+<h2>Token Expiration</h2>
+<p>Access tokens expire after <strong>1 hour</strong> (3600 seconds). Implement token refresh logic in your application:</p>
+<ol>
+<li>Store the token expiration time</li>
+<li>Request a new token before the current one expires</li>
+<li>Handle <code>401 Unauthorized</code> responses by refreshing the token</li>
+</ol>
+<h2>Security Best Practices</h2>
+<ol>
+<li><strong>Never expose credentials</strong> - Keep client secrets server-side</li>
+<li><strong>Use HTTPS</strong> - All API calls must use TLS</li>
+<li><strong>Rotate secrets</strong> - Periodically rotate your client credentials</li>
+<li><strong>Minimal scopes</strong> - Request only necessary permissions</li>
+<li><strong>Token storage</strong> - Store tokens securely, never in client-side code</li>
+</ol>
+<h2>OpenID Connect</h2>
+<p>For user-facing applications, we support OpenID Connect for delegated authentication. Contact support for OIDC configuration details.</p>
+<h2>Error Responses</h2>
+<p>Authentication failures return standard HTTP status codes:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>401 Unauthorized</code></td>
+<td>Invalid or expired token</td>
+</tr>
+<tr>
+<td><code>403 Forbidden</code></td>
+<td>Valid token but insufficient permissions</td>
+</tr>
+</tbody>
+</table>
+<p>Example error response:</p>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;unauthorized&quot;,
+  &quot;error_description&quot;: &quot;The access token is invalid or has expired&quot;
+}
+</code></pre>
+
+  </article>
+</div>
+
+  </main>
+  
+  <footer class="footer">
+  <div class="footer__container">
+    <a href="/" class="footer__logo">
+      <img 
+        src="https://portx.io/wp-content/uploads/2023/03/portx-logo-green.png" 
+        alt="PortX Logo"
+        width="80"
+        height="24"
+      >
+    </a>
+    
+    <nav>
+      <ul class="footer__links">
+        <li>
+          <a href="https://portx.io" class="footer__link" target="_blank" rel="noopener">
+            PortX Website
+          </a>
+        </li>
+        <li>
+          <a href="mailto:betiana.darderes@portx.io" class="footer__link">
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
+    <p>&copy; 2026 PortX. All rights reserved.</p>
+  </div>
+</footer>
+
+  
+  
+</body>
+</html>

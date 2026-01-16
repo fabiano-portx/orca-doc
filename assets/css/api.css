@@ -1,0 +1,133 @@
+/* API Reference Page Styles */
+.api-page {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--nav-height));
+}
+
+/* Version Selector */
+.version-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  background-color: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.version-selector__label {
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.version-selector__dropdown {
+  position: relative;
+}
+
+.version-selector__select {
+  appearance: none;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-2) var(--spacing-8) var(--spacing-2) var(--spacing-3);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  min-width: 180px;
+}
+
+.version-selector__select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 223, 153, 0.2);
+}
+
+.version-selector__dropdown::after {
+  content: '▼';
+  position: absolute;
+  right: var(--spacing-3);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+
+/* Version Badges */
+.version-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  margin-left: var(--spacing-2);
+}
+
+.version-badge--latest {
+  background-color: var(--color-primary);
+  color: var(--color-black);
+}
+
+.version-badge--deprecated {
+  background-color: var(--color-deprecated);
+  color: var(--color-black);
+}
+
+/* Deprecation Warning */
+.deprecation-warning {
+  display: none;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-4);
+  background-color: #FEF3C7;
+  border-left: 4px solid var(--color-deprecated);
+  color: #92400E;
+  font-size: var(--text-sm);
+}
+
+.deprecation-warning.show {
+  display: flex;
+}
+
+.deprecation-warning__icon {
+  font-size: var(--text-lg);
+}
+
+/* Stoplight Elements Container */
+.api-container {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Stoplight Elements Overrides */
+elements-api {
+  --color-primary: #00DF99;
+  --fs-base: 16px;
+}
+
+/* Style Stoplight's internal elements */
+elements-api::part(HttpMethodColors) {
+  --color-operation-get: #00DF99;
+  --color-operation-post: #8872FF;
+  --color-operation-put: #77B4FF;
+  --color-operation-delete: #EF4444;
+}
+
+/* Dark mode for API page */
+@media (prefers-color-scheme: dark) {
+  .version-selector {
+    background-color: var(--color-gray-800);
+  }
+  
+  .version-selector__select {
+    background-color: var(--color-gray-700);
+    color: var(--color-gray-100);
+    border-color: var(--color-gray-600);
+  }
+  
+  .deprecation-warning {
+    background-color: #78350F;
+    color: #FEF3C7;
+  }
+}

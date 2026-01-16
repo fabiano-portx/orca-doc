@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PortX ORCA Account Management API Documentation">
+  <title>Getting Started | PortX ORCA API</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+</head>
+<body>
+  <header class="nav">
+  <div class="nav__container">
+    <a href="/" class="nav__logo">
+      <img 
+        src="https://portx.io/wp-content/uploads/2024/08/PortX-2color-black-horizontal.png" 
+        alt="PortX Logo"
+        width="120"
+        height="32"
+      >
+    </a>
+    
+    <nav>
+      <ul class="nav__links">
+        <li>
+          <a href="/" class="nav__link ">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="/api/" class="nav__link ">
+            API Reference
+          </a>
+        </li>
+        <li>
+          <a href="/docs/getting-started/" class="nav__link nav__link--active">
+            Documentation
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  
+  <main>
+    
+<div class="docs-layout">
+  <aside class="docs-sidebar">
+    <p class="docs-sidebar__title">Documentation</p>
+    <nav>
+      <ul class="docs-sidebar__nav">
+        
+          <li>
+            <a 
+              href="/docs/getting-started/" 
+              class="docs-sidebar__link docs-sidebar__link--active"
+            >
+              Getting Started
+            </a>
+          </li>
+        
+          <li>
+            <a 
+              href="/docs/authentication/" 
+              class="docs-sidebar__link "
+            >
+              Authentication
+            </a>
+          </li>
+        
+          <li>
+            <a 
+              href="/docs/changelog/" 
+              class="docs-sidebar__link "
+            >
+              Changelog
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </aside>
+  
+  <article class="docs-content">
+    <h1>Getting Started</h1>
+<p>Welcome to the PortX ORCA API documentation. This guide will help you get up and running with our Account Management API.</p>
+<h2>Overview</h2>
+<p>The PortX ORCA API provides a comprehensive set of RESTful endpoints for managing banking operations, including:</p>
+<ul>
+<li><strong>Accounts</strong> - Create and manage bank accounts</li>
+<li><strong>Parties</strong> - Manage customers (persons and organizations)</li>
+<li><strong>Transactions</strong> - Process and query transactions</li>
+<li><strong>Cards</strong> - Issue and manage payment cards</li>
+<li><strong>Products</strong> - Configure financial products</li>
+<li><strong>Loans</strong> - Handle loan lifecycle management</li>
+</ul>
+<h2>Base URL</h2>
+<p>All API requests should be made to:</p>
+<pre><code>https://api.portx.io/orca/v1
+</code></pre>
+<h2>Quick Start</h2>
+<h3>1. Get Your API Credentials</h3>
+<p>Contact your PortX representative to obtain:</p>
+<ul>
+<li>Client ID</li>
+<li>Client Secret</li>
+<li>API Key</li>
+</ul>
+<h3>2. Authenticate</h3>
+<p>The API uses JWT tokens for authentication. First, obtain an access token:</p>
+<pre><code class="language-bash">curl -X POST https://auth.portx.io/oauth/token \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+    &quot;client_id&quot;: &quot;YOUR_CLIENT_ID&quot;,
+    &quot;client_secret&quot;: &quot;YOUR_CLIENT_SECRET&quot;,
+    &quot;grant_type&quot;: &quot;client_credentials&quot;
+  }'
+</code></pre>
+<h3>3. Make Your First Request</h3>
+<p>Use your access token to fetch accounts:</p>
+<pre><code class="language-bash">curl https://api.portx.io/orca/v1/accounts \
+  -H &quot;Authorization: Bearer YOUR_ACCESS_TOKEN&quot;
+</code></pre>
+<h2>Next Steps</h2>
+<ul>
+<li><a href="/docs/authentication/">Authentication Guide</a> - Learn more about securing your API calls</li>
+<li><a href="/api/">API Reference</a> - Explore all available endpoints</li>
+<li><a href="/docs/changelog/">Changelog</a> - See what's new in the latest version</li>
+</ul>
+<h2>Need Help?</h2>
+<p>If you have questions or need support, contact us at <a href="mailto:betiana.darderes@portx.io">betiana.darderes@portx.io</a>.</p>
+
+  </article>
+</div>
+
+  </main>
+  
+  <footer class="footer">
+  <div class="footer__container">
+    <a href="/" class="footer__logo">
+      <img 
+        src="https://portx.io/wp-content/uploads/2023/03/portx-logo-green.png" 
+        alt="PortX Logo"
+        width="80"
+        height="24"
+      >
+    </a>
+    
+    <nav>
+      <ul class="footer__links">
+        <li>
+          <a href="https://portx.io" class="footer__link" target="_blank" rel="noopener">
+            PortX Website
+          </a>
+        </li>
+        <li>
+          <a href="mailto:betiana.darderes@portx.io" class="footer__link">
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
+    <p>&copy; 2026 PortX. All rights reserved.</p>
+  </div>
+</footer>
+
+  
+  
+</body>
+</html>
