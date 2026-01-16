@@ -1,6 +1,6 @@
 <header class="nav">
   <div class="nav__container">
-    <a href="/" class="nav__logo">
+    <a href="{{ '/' | url }}" class="nav__logo">
       <img 
         src="https://portx.io/wp-content/uploads/2024/08/PortX-2color-black-horizontal.png" 
         alt="PortX Logo"
@@ -12,12 +12,12 @@
     <nav>
       <ul class="nav__links">
         <li>
-          <a href="/" class="nav__link {% if page.url == '/' %}nav__link--active{% endif %}">
+          <a href="{{ '/' | url }}" class="nav__link {% if page.url == '/' %}nav__link--active{% endif %}">
             Home
           </a>
         </li>
         <li>
-          <a href="/api/" class="nav__link {% if '/api/' in page.url %}nav__link--active{% endif %}">
+          <a href="{{ '/api/' | url }}" class="nav__link {% if '/api/' in page.url %}nav__link--active{% endif %}">
             API Reference
           </a>
         </li>

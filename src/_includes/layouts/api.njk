@@ -2,7 +2,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css">
-<link rel="stylesheet" href="/assets/css/api.css">
+<link rel="stylesheet" href="{{ '/assets/css/api.css' | url }}">
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
   <div class="version-selector">
     <label class="version-selector__label" for="version-select">API Version:</label>
     <div class="version-selector__dropdown">
-      <select id="version-select" class="version-selector__select">
+      <select id="version-select" class="version-selector__select" data-path-prefix="{{ pathPrefix }}">
         {% for v in versions %}
           <option 
             value="{{ v.version }}" 
@@ -39,7 +39,7 @@
   <!-- Stoplight Elements API Reference -->
   <div class="api-container">
     <elements-api
-      apiDescriptionUrl="/specs/{{ versions | getLatestVersionFile }}"
+      apiDescriptionUrl="{{ '/specs/' | url }}{{ versions | getLatestVersionFile }}"
       router="hash"
       layout="sidebar"
     />
@@ -49,5 +49,5 @@
 
 {% block scripts %}
 <script src="https://unpkg.com/@stoplight/elements/web-components.min.js"></script>
-<script src="/assets/js/version-switcher.js"></script>
+<script src="{{ '/assets/js/version-switcher.js' | url }}"></script>
 {% endblock %}

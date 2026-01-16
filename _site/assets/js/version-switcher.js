@@ -7,7 +7,17 @@
   'use strict';
 
   const DEPRECATED_VERSIONS = ['0.8.0', '0.6.2', '0.6.1'];
-  const SPECS_BASE_PATH = '/specs/';
+
+  /**
+   * Get the path prefix from the select element's data attribute
+   */
+  function getSpecsBasePath() {
+    const select = document.getElementById('version-select');
+    const pathPrefix = select ? select.dataset.pathPrefix || '' : '';
+    // Ensure proper formatting: /prefix/specs/ or /specs/
+    const prefix = pathPrefix.endsWith('/') ? pathPrefix.slice(0, -1) : pathPrefix;
+    return prefix + '/specs/';
+  }
 
   /**
    * Recreate the elements-api component with new spec URL
@@ -16,10 +26,11 @@
   function updateApiElement(specFile) {
     const container = document.querySelector('.api-container');
     const oldElement = container.querySelector('elements-api');
+    const specsBasePath = getSpecsBasePath();
     
     // Create new element with updated URL
     const newElement = document.createElement('elements-api');
-    newElement.setAttribute('apiDescriptionUrl', SPECS_BASE_PATH + specFile);
+    newElement.setAttribute('apiDescriptionUrl', specsBasePath + specFile);
     newElement.setAttribute('router', 'hash');
     newElement.setAttribute('layout', 'sidebar');
     

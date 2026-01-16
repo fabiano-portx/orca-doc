@@ -181,14 +181,34 @@ Dark mode is automatic based on system preference (`prefers-color-scheme`). Colo
 
 The `_site/` folder contains pure static HTML, CSS, and JS — no server required.
 
+### Path Prefix for Subpath Deployments
+
+When deploying to a subpath (e.g., `https://username.github.io/repo-name/`), set the `ELEVENTY_PATH_PREFIX` environment variable:
+
+```bash
+# For a repo named "orca-doc"
+ELEVENTY_PATH_PREFIX=/orca-doc/ npm run build
+```
+
+Or use the convenience script (update the path in `package.json` first):
+
+```bash
+npm run build:ghpages
+```
+
 ### GitHub Pages
 
-1. Build the site:
-   ```bash
-   npm run build
+1. Update the path prefix in `package.json` to match your repo name:
+   ```json
+   "build:ghpages": "ELEVENTY_PATH_PREFIX=/your-repo-name/ eleventy"
    ```
 
-2. Deploy `_site/` contents to your `gh-pages` branch, or configure GitHub Actions:
+2. Build the site:
+   ```bash
+   npm run build:ghpages
+   ```
+
+3. Deploy `_site/` contents to your `gh-pages` branch, or configure GitHub Actions:
 
    ```yaml
    # .github/workflows/deploy.yml
@@ -210,6 +230,8 @@ The `_site/` folder contains pure static HTML, CSS, and JS — no server require
              node-version: '20'
              
          - name: Install and Build
+           env:
+             ELEVENTY_PATH_PREFIX: /${{ github.event.repository.name }}/
            run: |
              npm ci
              npm run build
@@ -220,6 +242,14 @@ The `_site/` folder contains pure static HTML, CSS, and JS — no server require
              github_token: ${{ secrets.GITHUB_TOKEN }}
              publish_dir: ./_site
    ```
+
+### Custom Domain (No Subpath)
+
+If using a custom domain or deploying to the root, use the standard build:
+
+```bash
+npm run build
+```
 
 ### Amazon S3
 
@@ -262,6 +292,7 @@ Or connect your repository with:
 |---------|-------------|
 | `npm start` | Start dev server with hot reload |
 | `npm run build` | Build static site to `_site/` |
+| `npm run build:ghpages` | Build for GitHub Pages with path prefix |
 | `npm run clean` | Remove `_site/` directory |
 
 ## Tech Stack

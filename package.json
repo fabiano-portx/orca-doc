@@ -5,6 +5,7 @@
   "scripts": {
     "start": "eleventy --serve",
     "build": "eleventy",
+    "build:ghpages": "ELEVENTY_PATH_PREFIX=/orca-doc/ eleventy",
     "clean": "rm -rf _site"
   },
   "devDependencies": {
