@@ -9,7 +9,7 @@
         {% for item in navigation.docs %}
           <li>
             <a 
-              href="{{ item.url }}" 
+              href="{{ item.url | url }}" 
               class="docs-sidebar__link {% if page.url == item.url %}docs-sidebar__link--active{% endif %}"
             >
               {{ item.title }}
