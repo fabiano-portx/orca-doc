@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PortX ORCA Account Management API Documentation">
+  <title>HTTP Methods Guide | PortX ORCA API</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="/orca-doc/assets/css/variables.css">
+  <link rel="stylesheet" href="/orca-doc/assets/css/main.css">
+  
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/orca-doc/assets/images/favicon.svg">
+</head>
+<body>
+  <header class="nav">
+  <div class="nav__container">
+    <a href="/orca-doc/" class="nav__logo">
+      <img 
+        src="https://portx.io/wp-content/uploads/2024/08/PortX-2color-black-horizontal.png" 
+        alt="PortX Logo"
+        width="120"
+        height="32"
+      >
+    </a>
+    
+    <nav>
+      <ul class="nav__links">
+        <li>
+          <a href="/orca-doc/" class="nav__link ">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="/orca-doc/docs/getting-started/" class="nav__link nav__link--active">
+            Docs
+          </a>
+        </li>
+        <li>
+          <a href="/orca-doc/api/" class="nav__link ">
+            API Reference
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  
+  <main>
+    
+<div class="docs-layout">
+  <aside class="docs-sidebar">
+    <p class="docs-sidebar__title">Documentation</p>
+    <nav>
+      <ul class="docs-sidebar__nav">
+        
+          <li>
+            <a 
+              href="/docs/getting-started/" 
+              class="docs-sidebar__link "
+            >
+              Getting Started
+            </a>
+          </li>
+        
+          <li>
+            <a 
+              href="/docs/authentication/" 
+              class="docs-sidebar__link "
+            >
+              Authentication
+            </a>
+          </li>
+        
+          <li>
+            <a 
+              href="/docs/api_when_to_choose_post_put_patch/" 
+              class="docs-sidebar__link docs-sidebar__link--active"
+            >
+              HTTP Methods Guide
+            </a>
+          </li>
+        
+          <li>
+            <a 
+              href="/docs/changelog/" 
+              class="docs-sidebar__link "
+            >
+              Changelog
+            </a>
+          </li>
+        
+      </ul>
+    </nav>
+  </aside>
+  
+  <article class="docs-content">
+    <h1>Choosing the right HTTP Method: POST, PATCH, or PUT</h1>
+<h2>Overview</h2>
+<p>This document provides guidance for selecting the appropriate HTTP method for banking REST APIs that serve as a bridge between frontend applications and core banking processor technologies.</p>
+<p>The recommended approach uses a <strong>hybrid methodology</strong> that leverages the strengths of each HTTP method: PATCH for entity management operations and PUT for financial transaction operations. This design provides clear semantics, operational safety, and aligns with both REST principles and banking industry practices.</p>
+<h2>POST for Resource Creation</h2>
+<h3>When to Use POST</h3>
+<p>Use POST for creating new resources where the server generates identifiers or when the operation is not naturally idempotent.</p>
+<h3>Best Practices for POST</h3>
+<ul>
+<li>Reserve for resource creation and non-idempotent operations</li>
+<li>Let the server generate unique identifiers when appropriate</li>
+<li>Return created resource information in response</li>
+<li>Use appropriate HTTP status codes (201 for creation, 202 for async operations)</li>
+</ul>
+<h2>PUT for Idempotency and Improved Semantics</h2>
+<h3>When to Use PUT</h3>
+<p>Use PUT for transactional operations that must be idempotent and represent complete business operations rather than partial resource updates.</p>
+<h3>Key Benefits</h3>
+<ul>
+<li><strong>Idempotency</strong>: Critical for financial operations to prevent duplicate transactions</li>
+<li><strong>Safe Retries</strong>: Network timeouts and retries don't create duplicate operations</li>
+<li><strong>Regulatory Compliance</strong>: Deterministic transaction processing meets banking requirements</li>
+<li><strong>Semantic Clarity</strong>: Clear distinction between entity updates and financial operations</li>
+</ul>
+<h3>Best Practices for PUT</h3>
+<ul>
+<li>Use client-generated transaction identifiers for idempotency</li>
+<li>Ensure operations are truly idempotent - same request yields same result</li>
+<li>Design operations as complete business transactions</li>
+<li>Implement proper validation for all required transaction parameters</li>
+<li>Handle concurrent requests safely with appropriate locking mechanisms</li>
+</ul>
+<h3>Good Resource Candidates for adopting PUT</h3>
+<ul>
+<li><strong>Money Movement / Transfers</strong> - Internal transfers, credit transfers, ledger transfers</li>
+<li><strong>Payments</strong> - Any payment operation</li>
+<li><strong>Withdrawals</strong> - Account withdrawal operations</li>
+<li><strong>Deposits</strong> - Account deposit operations</li>
+</ul>
+<h2>PATCH for Entity Management</h2>
+<h3>When to Use PATCH</h3>
+<p>Use PATCH for modifying existing resource attributes where partial updates are the norm and clients typically update specific fields rather than entire resources.</p>
+<h3>Key Benefits</h3>
+<ul>
+<li><strong>Precision</strong>: Updates only the fields that need changing</li>
+<li><strong>Safety</strong>: Prevents accidental clearing of critical fields</li>
+<li><strong>Consumer Simplicity</strong>: Applications update specific attributes without managing full resources</li>
+<li><strong>API Evolution</strong>: New optional fields don't break existing integrations</li>
+</ul>
+<h3>Best Practices for PATCH</h3>
+<ul>
+<li>Implement <a href="https://datatracker.ietf.org/doc/html/rfc7396">RFC 7396 (JSON Merge Patch)</a> for consistent null value handling</li>
+<li>Treat omitted fields as &quot;don't change&quot;</li>
+<li>Use explicit null values to clear/remove fields</li>
+<li>Validate that critical fields cannot be inadvertently cleared</li>
+<li>Maintain clear audit trails showing exactly what changed</li>
+</ul>
+<h3>Good Resource Candidates for adopting PATCH over PUT</h3>
+<ul>
+<li><strong>Accounts</strong> - General account settings, preferences, metadata, etc.</li>
+<li><strong>Loans</strong> - Loan terms, status updates, configuration changes</li>
+<li><strong>Parties</strong> - Customer information, contact details, preferences</li>
+<li><strong>Products</strong> - Portifolio and Product configurations, features, settings</li>
+<li><strong>Addresses</strong> - Contact information updates</li>
+<li><strong>Documents</strong> - Document metadata, status, categorization, etc.</li>
+<li><em>Including sub-resources like <code>Holds</code>, <code>Cards</code>, <code>Escrows</code>, and others</em></li>
+</ul>
+<h2>General Decision Framework</h2>
+<p><strong>Choose POST when:</strong></p>
+<ul>
+<li>Creating new resources</li>
+<li>Server-generated identifiers are needed</li>
+<li>Operation is naturally non-idempotent</li>
+</ul>
+<p><strong>Choose PUT when:</strong></p>
+<ul>
+<li>Executing financial transactions</li>
+<li>Idempotency is critical</li>
+<li>Operation represents a complete business action</li>
+<li>Safe retries are essential</li>
+</ul>
+<p><strong>Choose PATCH when:</strong></p>
+<ul>
+<li>Modifying existing resource attributes</li>
+<li>Partial updates are common</li>
+<li>Frontend applications work with specific fields</li>
+<li>Safety from accidental overwrites is important</li>
+</ul>
+<hr>
+<p><em>For questions or clarifications about this guidance, please reach out to Fabiano.</em></p>
+
+  </article>
+</div>
+
+  </main>
+  
+  <footer class="footer">
+  <div class="footer__container">
+    <a href="/orca-doc/" class="footer__logo">
+      <img 
+        src="https://portx.io/wp-content/uploads/2023/03/portx-logo-green.png" 
+        alt="PortX Logo"
+        width="80"
+        height="24"
+      >
+    </a>
+    
+    <nav>
+      <ul class="footer__links">
+        <li>
+          <a href="https://portx.io" class="footer__link" target="_blank" rel="noopener">
+            PortX Website
+          </a>
+        </li>
+        <li>
+          <a href="mailto:betiana.darderes@portx.io" class="footer__link">
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
+    <p>&copy; 2026 PortX. All rights reserved.</p>
+  </div>
+</footer>
+
+  
+  
+</body>
+</html>
